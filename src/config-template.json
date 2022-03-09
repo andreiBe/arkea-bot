@@ -1,9 +1,6 @@
 {
-   "token": "",
-   "prefix": "&",
-   "currentGame": "",
-   "sysadmin": "",
-   "guildID": "",
-   "menuChannelID": "",
-   "restaurantID": ""
+  "token": "",
+  "prefix": "!",
+  "guilds": {},
+  "clientId": ""
 }
