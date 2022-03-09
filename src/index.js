@@ -19,6 +19,7 @@ import mongoose from "mongoose";
 // Needed for async to work
 require("babel-core/register");
 require("babel-polyfill");
+var fs = require("fs");
 
 const bot = new Client();
 
@@ -70,12 +71,44 @@ bot.on("message", async (message) => {
         message.channel.send("Commands:");
         message.channel.send(config.prefix + "ruokalista");
         break;
-      case "ruokalista":
-        const index = config.guildIDs.findIndex(
-          (gu) => gu === message.guild.id
-        );
+      case "arkea":
+        const guild = message.guild;
+        if (!config.menuChannelIDs.includes(message.channel.id)) {
+          config.menuChannelIDs.push(message.channel.id);
+          config.guildIDs.push(message.guild.id);
 
-        let channel = message.guild.channels.get(config.menuChannelIDs[index]);
+          var jsonData = JSON.stringify(config);
+          fs.writeFile("src/config.json", jsonData, function (err) {
+            if (err) {
+              console.log(err);
+            }
+          });
+          message.channel.send("Registered arkea bot successfully");
+        } else {
+          message.channel.send("Arkea bot already registered for this channel");
+        }
+        break;
+      case "dearkea":
+        let index = config.menuChannelIDs.findIndex(
+          (id) => id == message.channel.id
+        );
+        if (index != -1) {
+          config.menuChannelIDs.splice(index, 1);
+          config.guildIDs.splice(index, 1);
+          var jsonData = JSON.stringify(config);
+          fs.writeFile("src/config.json", jsonData, function (err) {
+            if (err) {
+              console.log(err);
+            }
+          });
+          message.channel.send("Deregistered arkea bot successfully");
+        } else {
+          message.channel.send("This channel isn't registered");
+        }
+        break;
+
+      case "ruokalista":
+        let channel = message.channel;
         let error = false;
         let result = await SetCWeekMenuURL(config.restaurantID).catch((e) => {
           error = true;
