@@ -35,6 +35,7 @@ Just send pull request
 - **Niilo Jaakkola** - _CEO, cleaning and code review_
 - **Lukas Luotola** - _Hosting and other ground work_
 - **Andrei Belogurov** - _Code in 2022_
+- **Eino Siipi** -_Finishing touches and "hosting"_
 
 ## License
 
