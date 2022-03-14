@@ -39,7 +39,7 @@ bot.on("ready", () => {
       bot.guilds.size +
       " servers"
   );
-  bot.user.setGame("Eating uunimakkara");
+  bot.user.setGame("Ruokalista Simulator");
 
   bot.guilds.forEach((guild) => {
     if (!(guild.id in config.guilds)) {
@@ -64,9 +64,7 @@ bot.on("guildDelete", (guild) => {
   saveJson();
 });
 
-//* 7 * * MON
-//Schedules, updates every day at 7:00AM. Fetches JSON file from Arkea website and extracts the information. Prints corresponding information for each day.
-let j = schedule.scheduleJob("* 7 * * 1", async () => {
+let j = schedule.scheduleJob("0 0 7 * * 1", async () => {
   clearCache();
   bot.guilds.forEach(async (guild) => {
     const gu = config.guilds[guild.id];
@@ -77,17 +75,16 @@ let j = schedule.scheduleJob("* 7 * * 1", async () => {
   });
 });
 function help(message) {
-  message.channel.send("Komennot (jokaisen edessä !):");
-  message.channel.send("ruokalista, printtaa ruokalistan");
+  message.channel.send("Komennot (jokaisen edessä "+config.prefix+"):");
+  message.channel.send("viikonlista, printtaa ruokalistan");
   message.channel.send(
-    "activate, alkaa lähettämään ruokalistoja viikottain kanavalle"
+    "lisää, alkaa lähettämään ruokalistoja viikottain kanavalle"
   );
   message.channel.send(
-    "deactivate, lopettaa viikoittaisten ruokalistojen lähettämisen"
+    "poista, lopettaa viikoittaisten ruokalistojen lähettämisen"
   );
   message.channel.send(
-    "ravintola <url>, asettaa sivun, jolta tiedot haetaan. Sivun täytyy olla nettiosoitteesta: masu.arkea.fi" +
-      "\n\tDefault arvo: https://masu.arkea.fi/fi/lounaslistat?restaurant=711af04e-e0d0-4e28-9a32-cacbe8504150"
+	"vaihdaravintola <url>, vaihtaa ravintolan, josta tiedot haetaan. Url täytyy olla ravintolan sivu masu.arkea.fi sivustolta"
   );
 }
 function saveJson() {
@@ -107,9 +104,9 @@ function activate(message) {
     guild.channels.push(message.channel.id);
 
     if (!saveJson()) message.channel.send("Error saving json!");
-    else message.channel.send("Registered arkea bot successfully");
+    else message.channel.send("Lähetetään ruokalistoja!");
   } else {
-    message.channel.send("Arkea bot already registered for this channel");
+    message.channel.send("Botti on jo rekisteröity");
   }
 }
 function deactivate(message) {
@@ -121,9 +118,9 @@ function deactivate(message) {
     );
 
     if (!saveJson()) message.channel.send("Error saving json!");
-    else message.channel.send("Deregistered arkea bot successfully");
+    else message.channel.send("Ruokalistat viety kaappiin!");
   } else {
-    message.channel.send("This channel isn't registered");
+    message.channel.send("Tätä kanavaa ei ole rekisteröity");
   }
 }
 async function ruokalista(channel, restourantId) {
@@ -148,21 +145,25 @@ bot.on("message", async (message) => {
       case "help":
         help(message);
         break;
-      case "activate":
+      case "lisää":
         activate(message);
         break;
-      case "deactivate":
+      case "poista":
         deactivate(message);
         break;
-      case "ruokalista":
+      case "viikonlista":
         let restourantId = config.guilds[message.guild.id].restourantId;
         ruokalista(message.channel, restourantId);
         break;
-      case "ravintola":
+      case "vaihdaravintola":
+		if (args.length < 2) {
+			message.channel.send("Anna ravintolan url välilyönnillä erotettuna!");
+			return;
+		}
         let path = args[1];
         const guild = message.guild;
         config.guilds[guild.id].restourantId = path;
-        message.channel.send("Changed ravintola successfully");
+        message.channel.send("Ravintola vaihdettu!");
     }
   }
 });

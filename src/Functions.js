@@ -75,7 +75,18 @@ let cached = {};
 function clearCache() {
   cached = {};
 }
-
+// Returns the ISO week of the date.
+Date.prototype.getWeek = function() {
+  var date = new Date(this.getTime());
+  date.setHours(0, 0, 0, 0);
+  // Thursday in current week decides the year.
+  date.setDate(date.getDate() + 3 - (date.getDay() + 6) % 7);
+  // January 4 is always in week 1.
+  var week1 = new Date(date.getFullYear(), 0, 4);
+  // Adjust to Thursday in week 1 and count number of weeks from date to week1.
+  return 1 + Math.round(((date.getTime() - week1.getTime()) / 86400000
+                        - 3 + (week1.getDay() + 6) % 7) / 7);
+}
 async function SetCWeekMenuURL(restaurantID) {
   return new Promise(async (resolve, reject) => {
     try {
@@ -88,16 +99,27 @@ async function SetCWeekMenuURL(restaurantID) {
       //content of page as dom element
       const html = parse(htmlString);
       const mydata = {};
+
       //finding the information from the html
       const thisweek = html.querySelector("#current-week");
-      let days = thisweek.querySelectorAll(".day");
+      const nextweek = html.querySelector("#next-week");
+      //fuck arkea
+      const title1 = thisweek.querySelector(".widget-title-2");
+      const curweek = new Date().getWeek();
+      let days;
+      if (parseInt(title1.text.split(" ")[1]) == curweek) {
+        days = thisweek.querySelectorAll(".day");
+      } else {
+        days = nextweek.querySelectorAll(".day");
+      }
+      
       days.forEach((day) => {
         parseDayElement(day, mydata);
       });
       resolve(mydata);
       cached[restaurantID] = mydata;
     } catch (error) {
-      reject("Can't open arkea page");
+      reject("Arkean sivu rikki");
       return;
     }
   });
