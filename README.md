@@ -1,36 +1,35 @@
 # Arkea Bot - 1.4 - ES6 - WIP
 
-## Getting Started
+## Ohjeet houstaamiseen
 
-1. Clone git repo
+1. Hanki nodejs
+
+2. Kloonaa git repo (tai lataa ziptiedosto githubista)
 
 ```
 https://github.com/andreiBe/arkea-bot
 ```
 
-2. Run to install depencies:
+3. Aja tämä komento kansiossa, jossa tiedostot ovat:
 
 ```
 npm install
 ```
 
-3. Run to start server:
+4. Lisää src kansioon tiedosto nimeltä config.json. <br>
+   _Voit käyttää apuna templatetiedostoa. Config tiedostoon pitää laittaa vain discord bottisi token_
+
+5. Komento, jolla serveri lähtee käyntiin:
 
 ```
 npm start
 ```
 
-To build but not start use:
+## Kehittämiseen osallistuminen
 
-```
-npm run build
-```
+Lähetä pull request
 
-## Contributing
-
-Just send pull request
-
-## Authors
+## Tekijät
 
 - **Niilo Jaakkola** - _CEO, cleaning and code review_
 - **Lukas Luotola** - _Hosting and other ground work_
