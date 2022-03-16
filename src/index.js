@@ -66,7 +66,7 @@ bot.on("guildDelete", (guild) => {
 
 //* 7 * * MON
 //Schedules, updates every day at 7:00AM. Fetches JSON file from Arkea website and extracts the information. Prints corresponding information for each day.
-let j = schedule.scheduleJob("1 8 9 * * 1", async () => {
+let j = schedule.scheduleJob("1 1 7 * * 1", async () => {
   clearCache();
   bot.guilds.forEach(async (guild) => {
     const gu = config.guilds[guild.id];
