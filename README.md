@@ -25,7 +25,7 @@ npm install
 npm start
 ```
 
-6. Komento, jolla vaihdat ravintolaa (lähetä viestinä discordissa, linkki masu.arkea sivulta:
+6. Komento, jolla vaihdat ravintolaa (lähetä viestinä discordissa, linkki masu.arkea sivulta):
 
 ```
 !vaihdaravintola ravintolalinkki
