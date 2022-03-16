@@ -114,6 +114,7 @@ function deactivate(message) {
 
     if (!saveJson()) message.channel.send("Error saving json!");
     else message.channel.send({files: ["https://c.tenor.com/ivU7HH5XJg8AAAAd/kerttuli-jairola.gif"]});
+    message.channel.send("Ruokalistat viety kaappiin!");
   } else {
     message.channel.send("Tätä kanavaa ei ole rekisteröity");
   }
@@ -124,7 +125,7 @@ async function ruokalista(channel, restourantId) {
     error = true;
   });
   if (!channel || error) {
-    if (channel) channel.send(Arkean sivu ei toimi);;
+    if (channel) channel.send("Arkean sivu ei toimi");
     return;
   }
   getMenu(result, channel);
