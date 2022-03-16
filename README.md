@@ -25,6 +25,17 @@ npm install
 npm start
 ```
 
+6. Komento, jolla vaihdat ravintolaa (lähetä viestinä discordissa, linkki masu.arkea sivulta:
+
+```
+!vaihdaravintola ravintolalinkki
+```
+
+7. Komento, jolla botti lähettää viikottain ruokalistat kanavalle (lähetä viestinä discordissa):
+
+```
+!lisää
+```
 ## Kehittämiseen osallistuminen
 
 Lähetä pull request
