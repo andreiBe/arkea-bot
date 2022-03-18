@@ -25,7 +25,7 @@ npm install
 npm start
 ```
 
-6. Komento, jolla vaihdat ravintolaa (lähetä viestinä discordissa, linkki masu.arkea sivulta):
+6. Komento, jolla vaihdat ravintolaa (lähetä viestinä discordissa, linkki masu.arkea.fi sivulta):
 
 ```
 !vaihdaravintola ravintolalinkki
@@ -45,7 +45,7 @@ Lähetä pull request
 - **Niilo Jaakkola** - _CEO, cleaning and code review_
 - **Lukas Luotola** - _Hosting and other ground work_
 - **Andrei Belogurov** - _Code in 2022_
-- **Eino Siipi** -_Finishing touches and "hosting"_
+- **Eino Siipi** -_Finishing touches and hosting_
 
 ## License
 
