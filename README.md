@@ -1,4 +1,8 @@
-# Arkea Bot - 1.4 - ES6 - WIP
+# No longer maintained or really working, go to https://github.com/EinoFin/ArkeaBot2.0
+
+
+
+# Arkea Bot - 1.4 - ES6 - EOL
 
 ## Ohjeet houstaamiseen
 
